@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: bayport-services
+  namespace: argo
+spec:
+  generators:
+    - git:
+        repoURL: git@github.com:NovataInc/novata-k8s-manifests.git
+        revision: master
+        directories:
+          - path: application-charts/*/values/*
