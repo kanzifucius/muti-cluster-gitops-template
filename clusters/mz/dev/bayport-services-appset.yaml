@@ -7,6 +7,6 @@ spec:
   generators:
     - git:
         repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
-        revision: master
+        revision: main
         directories:
           - path: application-charts/*/values/*

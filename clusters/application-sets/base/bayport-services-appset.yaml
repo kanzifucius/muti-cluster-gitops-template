@@ -23,7 +23,7 @@ spec:
       project: novata-k8s-infra
       source:
         repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
-        targetRevision: master
+        targetRevision: main
         path: '{{path}}'
       destination:
         server:  'https://kubernetes.default.svc'
