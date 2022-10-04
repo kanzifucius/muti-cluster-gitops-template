@@ -9,25 +9,22 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: {{ $.Values.cluster.name }}-{{ $env.name }}
+  description: bayport-app-bootstrap
   # Allow manifests to deploy from any Git repos
   destinations:
-    - namespace: "dev"
+    - namespace: dev
       server: "*"
-    - namespace: "kube-system"
+    - namespace: kube-system
       server: "*"
-  # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange, NetworkPolicy
-  namespaceResourceBlacklist:
-    - group: ''
-      kind: ResourceQuota
-    - group: ''
-      kind: LimitRange
-    - group: ''
-      kind: NetworkPolicy
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
   sourceRepos:
     - '*'
 ---
-
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
@@ -38,20 +35,18 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
-  description: {{ $.Values.cluster.name }}-{{ $env.name }}
+  description: bayport-app-bootstrap
   # Allow manifests to deploy from any Git repos
   destinations:
-      - namespace: "qa"
-        server: "*"
-      - namespace: "kube-system"
-        server: "*"
-  # Allow all namespaced-scoped resources to be created, except for ResourceQuota, LimitRange, NetworkPolicy
-  namespaceResourceBlacklist:
-    - group: ''
-      kind: ResourceQuota
-    - group: ''
-      kind: LimitRange
-    - group: ''
-      kind: NetworkPolicy
+    - namespace: qa
+      server: "*"
+    - namespace: kube-system
+      server: "*"
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
   sourceRepos:
     - '*'
