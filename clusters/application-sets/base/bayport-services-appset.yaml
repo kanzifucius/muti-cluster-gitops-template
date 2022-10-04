@@ -1,12 +1,12 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  namee: bayport-services
-  namespace: argo
+  name: bayport-services
+  namespace: argocd
 spec:
   generators:
     - git:
-        repoURL: git@github.com:NovataInc/novata-k8s-manifests.git
+        repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
         revision: master
         directories:
           - path: will/be/replaced
