@@ -5,6 +5,14 @@ metadata:
   namespace: argocd
 spec:
   generators:
+    - matrix:
+        name: bayport-services
+        include:
+          - name: bayport-services
+            values:
+              - name: bayport-services
+                path: application-charts/*/values/*
+                repoURL:
     - git:
         repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
         revision: master
