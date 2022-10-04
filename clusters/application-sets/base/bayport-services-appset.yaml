@@ -13,7 +13,7 @@ spec:
 
   template:
     metadata:
-      name: '{{path[1]}}'
+      name: '{{path[1]}}-{{path[3]}}'
     spec:
       syncPolicy:
         automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
@@ -22,9 +22,12 @@ spec:
           allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
       project: default
       source:
-        repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
+        helm:
+          valueFiles:
+            - '{{path[0]}}/{{path[1]}}/{{path[2]}}/values-{{path[3]}}.yaml'
+        path: '{{path[0]}}/{{path[1]}}'
+        repoURL: 'https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-'
         targetRevision: main
-        path: '{{path}}'
       destination:
         server:  'https://kubernetes.default.svc'
 
