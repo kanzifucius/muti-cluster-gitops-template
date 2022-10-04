@@ -9,4 +9,4 @@ spec:
         repoURL: git@github.com:NovataInc/novata-k8s-manifests.git
         revision: master
         directories:
-          - path: application-charts/*/values/*
+          - path: application-charts/*/values/clusters/tz/*

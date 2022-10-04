@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: bayport-services
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
+        revision: main
+        directories:
+          - path: application-charts/*/values/clusters/za/*
+
