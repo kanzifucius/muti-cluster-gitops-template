@@ -5,23 +5,14 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - matrix:
-        name: bayport-services
-        include:
-          - name: bayport-services
-            values:
-              - name: bayport-services
-                path: application-charts/*/values/*
-                repoURL:
     - git:
         repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
-        revision: master
+        revision: main
         directories:
-          - path: will/be/replaced
-
+          - path: will be replaced
   template:
     metadata:
-      name: '{{path[1]}}-{{path[3]}}'
+      name: '{{path[1]}}-{{path[4]}}-{{path[4]}}'
     spec:
       syncPolicy:
         automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
@@ -32,7 +23,7 @@ spec:
       source:
         helm:
           valueFiles:
-            - '{{path[0]}}/{{path[1]}}/{{path[2]}}/{{path[3]}}/values.yaml'
+            - '{{path}}'
         path: '{{path[0]}}/{{path[1]}}'
         repoURL: 'https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-'
         targetRevision: main
