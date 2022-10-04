@@ -22,21 +22,9 @@ spec:
           allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
       project: novata-k8s-infra
       source:
-        repoURL: git@github.com:NovataInc/novata-k8s-manifests.git
+        repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
         targetRevision: master
         path: '{{path}}'
       destination:
         server:  'https://kubernetes.default.svc'
-        namespace: addons
-      ignoreDifferences:
-        # for the specified json pointers
-        - group: kyverno.io
-          kind: ClusterPolicy
-          jsonPointers:
-            - /spec
-        # karpenter webhook injects data to the secret
-        - kind: Secret
-          name: karpenter-cert
-          namespace: addons
-          jsonPointers:
-            - /data
+
