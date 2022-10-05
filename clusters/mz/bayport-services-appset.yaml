@@ -9,5 +9,56 @@ spec:
         repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
         revision: main
         directories:
-          - path: application-charts/*/values/clusters/mz/*
+          - path: will be replaced
+  template:
+    metadata:
+      name: '{{path[1]}}-{{path[4]}}-{{path[5]}}'
+    spec:
+      syncPolicy:
+        automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+          prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+          selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+          allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+      project: default
+      source:
+        helm:
+          valueFiles:
+            - '{{path}}'
+        path: '{{path[0]}}/{{path[1]}}'
+        repoURL: 'https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-'
+        targetRevision: main
+      destination:
+        server:  'https://kubernetes.default.svc'
+
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: bayport-services
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
+        revision: main
+        directories:
+          - path: will be replaced
+  template:
+    metadata:
+      name: '{{path[1]}}-{{path[4]}}-{{path[5]}}'
+    spec:
+      syncPolicy:
+        automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+          prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+          selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+          allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+      project: {{path[5]}}
+      source:
+        helm:
+          valueFiles:
+            - '{{path}}'
+        path: '{{path[0]}}/{{path[1]}}'
+        repoURL: 'https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-'
+        targetRevision: main
+      destination:
+        server:  'https://kubernetes.default.svc'
 
