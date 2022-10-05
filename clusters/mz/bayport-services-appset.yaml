@@ -9,6 +9,6 @@ spec:
         repoURL: https://github.com/kanzifucius/muti-cluster-gitops-worklaods-template-
         revision: main
         directories:
-          - path: application-charts/*/values/clusters/mz/
+          - path: application-charts/*/values/clusters/mz/*
 
 
