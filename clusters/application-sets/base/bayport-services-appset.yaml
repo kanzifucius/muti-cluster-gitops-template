@@ -19,6 +19,7 @@ spec:
           prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
           selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
           allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
+          createNamespace: true
       project: default
       source:
         helm:
@@ -29,4 +30,6 @@ spec:
         targetRevision: main
       destination:
         server:  'https://kubernetes.default.svc'
+        namespace: '{{path[5]}}'
+
 
