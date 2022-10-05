@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: bayport-services
+  name: bayport-services-za
   namespace: argocd
 spec:
   generators:
